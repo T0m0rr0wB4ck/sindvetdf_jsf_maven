@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -37,9 +40,14 @@ public class Pessoa implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
     
+    @OneToOne(mappedBy = "pessoa", fetch = FetchType.LAZY)
+    @ForeignKey(name="EnderecoPessoa")
+    private Endereco endereco;
+    
     @ManyToOne(optional=false)
     @ForeignKey(name="PessoaSexo")
-    private Pessoa pessoa;
+    @JoinColumn(name="IdSexo", referencedColumnName = "IdSexo")
+    private Sexo sexo;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -101,6 +109,23 @@ public class Pessoa implements Serializable{
         this.dataCadastro = dataCadastro;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

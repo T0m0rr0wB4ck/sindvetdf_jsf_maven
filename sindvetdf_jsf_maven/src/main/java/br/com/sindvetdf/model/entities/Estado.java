@@ -19,13 +19,13 @@ public class Estado implements Serializable{
     
     @Id
     @GeneratedValue
-    @Column(name="idEstado", nullable=false)
+    @Column(name="IdEstado", nullable=false)
     private Integer idEstado;
     @Column(name="Nome", length=80, nullable=false)
     private String estado;
     
     @OneToMany
-    @ForeignKey(name="estado")
+    @ForeignKey(name="EnderecoEstado")
     private List<Endereco> enderecos;
 
     public Estado() {

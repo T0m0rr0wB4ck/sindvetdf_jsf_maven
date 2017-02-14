@@ -19,13 +19,13 @@ public class TipoLogradouro implements Serializable{
     
     @Id
     @GeneratedValue
-    @Column(name="idTipoLogradouro", nullable=false)
+    @Column(name="IdTipoLogradouro", nullable=false)
     private Integer idTipoLogradouro;
     @Column(name="DescricaoTipoLogradouro", length=35, nullable=false)
     private String descricaoTipoLogradouro;
     
     @OneToMany
-    @ForeignKey(name="Endereco_TipoLogradouro")
+    @ForeignKey(name="EnderecoTipoLogradouro")
     private List<Endereco> enderecos;
 
     public TipoLogradouro() {

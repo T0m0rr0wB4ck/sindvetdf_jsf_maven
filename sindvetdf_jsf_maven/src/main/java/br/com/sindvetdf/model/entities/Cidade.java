@@ -19,13 +19,13 @@ public class Cidade implements Serializable{
     
     @Id
     @GeneratedValue
-    @Column(name="idCidade", nullable=false)
+    @Column(name="IdCidade", nullable=false)
     private Integer idCidade;
     @Column(name="Nome", length=80, nullable=false)
     private String nome;
     
     @OneToMany
-    @ForeignKey(name="CidadeEndereço")
+    @ForeignKey(name="EnderecoCidade")
     private List<Endereco> enderecos;
 
     public List<Endereco> getEnderecos() {

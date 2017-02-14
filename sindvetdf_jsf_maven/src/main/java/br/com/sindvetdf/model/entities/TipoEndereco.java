@@ -20,13 +20,13 @@ public class TipoEndereco implements Serializable{
     
     @Id
     @GeneratedValue
-    @Column(name="idTipoEndereco", nullable=false)
+    @Column(name="IdTipoEndereco", nullable=false)
     private Integer idTipoEndereco;
     @Column(name="DescricaoTipoEndereco", length=35, nullable=false)
     private String descricaoTipoEndereco;
     
     @OneToMany(mappedBy="tipoendereco", fetch=FetchType.LAZY)
-    @ForeignKey(name="Endereco_TipoEndereco")
+    @ForeignKey(name="EnderecoTipoEndereco")
     private List<Endereco> enderecos;
 
     public TipoEndereco() {
