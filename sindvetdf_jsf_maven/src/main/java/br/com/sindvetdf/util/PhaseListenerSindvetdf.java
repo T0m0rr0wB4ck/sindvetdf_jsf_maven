@@ -9,17 +9,17 @@ public class PhaseListenerSindvetdf implements PhaseListener{
     //Antes da fase
     @Override
     public void beforePhase(PhaseEvent fase) {
+        System.out.println("Antes da fase: "+ fase.getPhaseId());
         if(fase.getPhaseId().equals(PhaseId.RESTORE_VIEW)){
-        System.out.println("Antes da fase: "+ getPhaseId());
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        FacesContexUtil.setRequestSession(session);
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            FacesContexUtil.setRequestSession(session);
         }
     }
     //Depois da fase
     @Override
     public void afterPhase(PhaseEvent fase) {
-        System.out.println("Depois da fase: "+ getPhaseId());        
+        System.out.println("Depois da fase: "+ fase.getPhaseId());        
         if (fase.getPhaseId().equals(PhaseId.RENDER_RESPONSE)) {
             Session session = FacesContexUtil.getRequestSession();
             try {

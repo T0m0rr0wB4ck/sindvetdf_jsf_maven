@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 
-public class HibernateDAO<T> implements IntercafeDAO<T>, Serializable {
+public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
     
     private static final long serialVersionUID = 1L;
     
