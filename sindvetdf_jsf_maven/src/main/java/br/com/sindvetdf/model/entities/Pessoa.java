@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import org.hibernate.annotations.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -34,6 +36,10 @@ public class Pessoa implements Serializable{
     @Column (name="DataCadastro", nullable=false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
+    
+    @ManyToOne(optional=false)
+    @ForeignKey(name="PessoaSexo")
+    private Pessoa pessoa;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -119,6 +125,5 @@ public class Pessoa implements Serializable{
         }
         return true;
     }
-    
     
 }
