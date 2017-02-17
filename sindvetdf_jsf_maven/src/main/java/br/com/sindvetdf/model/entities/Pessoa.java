@@ -2,7 +2,6 @@ package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
-@Table (name="pessoa")
+@Table(name="pessoa")
 public class Pessoa implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -25,34 +24,35 @@ public class Pessoa implements Serializable{
     @GeneratedValue
     @Column(name="IdPessoa", nullable=false)
     private Integer idPessoa;
-    @Column (name="Nome", nullable=false, length=80)
+    @Column(name="Nome", nullable=false, length=80)
     private String nome;
-    @Column (name="E-mail", nullable=false, length=80)
+    @Column(name="E-mail", nullable=false, length=80)
     private String email;
-    @Column (name="Telefone", nullable=false, length=15)
+    @Column(name="Telefone", nullable=false, length=15)
     private String telefone;
-    @Column (name="CPF", nullable=false, length=14)
+    @Column(name="CPF", nullable=false, length=14)
     private String cpf;
-    @Column (name="DataNascimento", nullable=false)
+    @Column(name="DataNascimento", nullable=false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
-    @Column (name="DataCadastro", nullable=false)
+    @Column(name="DataCadastro", nullable=false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
     
-    @OneToOne(mappedBy = "pessoa", fetch = FetchType.LAZY)
-    @ForeignKey(name="EnderecoPessoa")
+    @OneToOne(mappedBy="pessoa", fetch=FetchType.LAZY)
+    @ForeignKey(name="Endereco_Pessoa")
     private Endereco endereco;
     
     @ManyToOne(optional=false)
-    @ForeignKey(name="PessoaSexo")
+    @ForeignKey(name="Pessoa_Sexo")
     @JoinColumn(name="IdSexo", referencedColumnName = "IdSexo")
     private Sexo sexo;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    
+    public Pessoa(){
+        this.sexo = new Sexo();
+        this.endereco = new Endereco();
     }
-
+    
     public Integer getIdPessoa() {
         return idPessoa;
     }
@@ -124,20 +124,16 @@ public class Pessoa implements Serializable{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    
-    
+        
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.idPessoa);
+        hash = 23 * hash + (this.idPessoa != null ? this.idPessoa.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -145,10 +141,9 @@ public class Pessoa implements Serializable{
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (!Objects.equals(this.idPessoa, other.idPessoa)) {
+        if (this.idPessoa != other.idPessoa && (this.idPessoa == null || !this.idPessoa.equals(other.idPessoa))) {
             return false;
         }
         return true;
     }
-    
 }

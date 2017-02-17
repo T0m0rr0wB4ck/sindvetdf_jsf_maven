@@ -2,9 +2,9 @@ package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,8 +24,8 @@ public class Estado implements Serializable{
     @Column(name="Nome", length=80, nullable=false)
     private String estado;
     
-    @OneToMany
-    @ForeignKey(name="EnderecoEstado")
+    @OneToMany(mappedBy="estado", fetch=FetchType.LAZY)
+    @ForeignKey(name="Endereco_Estado")
     private List<Endereco> enderecos;
 
     public Estado() {
@@ -56,17 +56,7 @@ public class Estado implements Serializable{
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.idEstado);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -74,11 +64,16 @@ public class Estado implements Serializable{
             return false;
         }
         final Estado other = (Estado) obj;
-        if (!Objects.equals(this.idEstado, other.idEstado)) {
+        if (this.idEstado != other.idEstado && (this.idEstado == null || !this.idEstado.equals(other.idEstado))) {
             return false;
         }
         return true;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + (this.idEstado != null ? this.idEstado.hashCode() : 0);
+        return hash;
+    }
 }

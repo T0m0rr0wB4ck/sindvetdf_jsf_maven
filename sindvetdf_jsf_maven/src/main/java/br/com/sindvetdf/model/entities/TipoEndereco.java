@@ -2,7 +2,6 @@ package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +25,7 @@ public class TipoEndereco implements Serializable{
     private String descricaoTipoEndereco;
     
     @OneToMany(mappedBy="tipoendereco", fetch=FetchType.LAZY)
-    @ForeignKey(name="EnderecoTipoEndereco")
+    @ForeignKey(name="Endereco_TipoEndereco")
     private List<Endereco> enderecos;
 
     public TipoEndereco() {
@@ -57,17 +56,7 @@ public class TipoEndereco implements Serializable{
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.idTipoEndereco);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -75,12 +64,16 @@ public class TipoEndereco implements Serializable{
             return false;
         }
         final TipoEndereco other = (TipoEndereco) obj;
-        if (!Objects.equals(this.idTipoEndereco, other.idTipoEndereco)) {
+        if (this.idTipoEndereco != other.idTipoEndereco && (this.idTipoEndereco == null || !this.idTipoEndereco.equals(other.idTipoEndereco))) {
             return false;
         }
         return true;
     }
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (this.idTipoEndereco != null ? this.idTipoEndereco.hashCode() : 0);
+        return hash;
+    }
 }

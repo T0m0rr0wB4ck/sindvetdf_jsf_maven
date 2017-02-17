@@ -6,72 +6,62 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:src="http://www.springframework.org/security/facelets/tags">
+      ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
     
     <h:head>
-        <title>PAIVA System - Sistemas S/A.</title>
+        <title>Semeru - Curso de JSF e Maven</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <script type="text/javascript" src="../resources/js/primefaces-locale.js"/>
-        <link href="./../resources/restrict/css/erudio.css" rel="stylesheet" type="text/css"/>
-        <link href="./../resources/restrict/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/restrict/css/sindvetdf.css" rel="stylesheet" type="text/css" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/restrict/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />    
     </h:head>
 
     <h:body>
 
         <div id="topo">
-            <a href="http://www.palger.com.br/"><div id="logotipo"></div></a>
-        
+            <a href="http://www.sindvetdf.org.br/"><div id="logotipo"></div></a>            
+                        
             <div id="logoff">
                 <h:form>
-                    <br />
-                    <h5><h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.nomeUsuario}!"/></h5>
-                    <br />
+                    <br/>
+                    <h5><h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()}!"/></h5>
+                    <br/>
                     <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">
-                        <h4>LOGOFF</h4>
-                    </a>
+	                <h4>LOGOFF</h4>
+	            </a>
+
                 </h:form>
-            </div>    
-            
+            </div>
+        </div>  
+
+        <div id="menu"><!-- Menu ########################################## Menu-->
+            <h:form>    
+                <p:menubar styleClass="labelmenu">
+
+                    <p:submenu label="Cadastros">  
+                        <p:menuitem value="Cidades" url="/restrict/cadastrarcidade.faces"/>                        
+                        <p:menuitem value="Pessoas" url="/restrict/cadastrarpessoa.faces"/>                        
+                    </p:submenu> 
+                    <p:submenu label="Consultas">  
+                          
+                    </p:submenu>                                      
+                </p:menubar> 
+            </h:form>           
         </div>
 
-        <div id="menu">
-            <h:form>
-                <p:menubar styleClass="labelmenu" >
-                    <p:submenu label="Cadastro">
-                        <p:menuitem value="Clientes" action="#{mbCliente.limpCliente}" ajax="false"/>
-                        <p:menuitem value="Funcionários" action="#{mbFuncionario.limpFuncionario}" ajax="false"/>
-                        <p:menuitem value="Equipamentos" action="#{mbEquipamento.limpEquipamento}" ajax="false"/>
-                        <p:menuitem value="Procedimentos" action="#{mbProcedimento.limpProcedimento}" ajax="false"/>
-                        <p:menuitem value="Cargo" action="#{mbCargo.limpCargo}" ajax="false"/>
-                    </p:submenu>
-                    <p:submenu label="Consultas" >
-                        <p:menuitem value="Clientes" url="/restrict/consultarcliente.faces" />
-                        <p:menuitem value="Funcionários" url="/restrict/consultarfuncionarios.faces" />
-                        <p:menuitem value="Equipamentos" url="/restrict/consultarequipamentos.faces" />
-                        <p:menuitem value="Procedimentos" url="/restrict/consultarprocedimentos.faces" />
-                    </p:submenu>
-                    <p:submenu label="Agenda" >
-                        <p:menuitem value="Agendar Atendimento" action="#{mbAtendimento.novoAtendimento}" ajax="false" />
-                        <p:menuitem value="Gerenciar Atendimento" action="#{mbGerenciarAtendimento.novaConsulta}" ajax="false" />
-                        <p:menuitem value="Lista de Agendamento" url="/restrict/consultaratendimentos.faces" />
-                    </p:submenu>
-                    <p:submenu label="Alterar Senha" >
-                        <p:menuitem value="Alterar Senha" url="/restrict/alterarsenha.faces" />
-                    </p:submenu>
-                </p:menubar>
-            </h:form>
-        </div>
+        <!-- Menu ########################################## Menu -->
 
         <div id="tarefas">
             <ui:insert name="tarefas"></ui:insert>
         </div>
+
         <div id="rodape">
-            <a href="http://www.palger.com.br/"><img src="./../resources/restrict/images/logo_mini_.png" /></a>
-            <div id="copyright">
-                <a href="http://www.palger.com.br/"> PAIVA System - Sistemas S/A. - &copy; Copyright paiva.com.br 2012</a>
+            <a href="http://www.sindvetdf.org.br/"><img src="#{facesContext.externalContext.requestContextPath}/resources/restrict/images/logo_mini.png" /></a>
+
+            <div id="copyright">                  
+                <a href="http://www.sindvetdf.org.br/">SINDVET/DF - Sindicato dos Medico Veterinários do Distrito Federal - &copy; Copyright sindvetdf.org.br 2016</a>
             </div>
-        </div>
-        
+        </div> <!--Fim da div rodape -->
+
     </h:body>
 
 </html>

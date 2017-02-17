@@ -2,7 +2,6 @@ package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table (name="sexo")
+@Table(name="sexo")
 public class Sexo implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -26,14 +25,10 @@ public class Sexo implements Serializable{
     private String descricao;
 
     @OneToMany(mappedBy="sexo", fetch=FetchType.LAZY)
-    @ForeignKey(name="PessoaSexo")
+    @ForeignKey(name="Pessoa_Sexo")
     private List<Pessoa> pessoas;
     
     public Sexo() {
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public Integer getIdSexo() {
@@ -63,15 +58,12 @@ public class Sexo implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.IdSexo);
+        hash = 97 * hash + (this.IdSexo != null ? this.IdSexo.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -79,10 +71,9 @@ public class Sexo implements Serializable{
             return false;
         }
         final Sexo other = (Sexo) obj;
-        if (!Objects.equals(this.IdSexo, other.IdSexo)) {
+        if (this.IdSexo != other.IdSexo && (this.IdSexo == null || !this.IdSexo.equals(other.IdSexo))) {
             return false;
         }
         return true;
     }
-    
 }

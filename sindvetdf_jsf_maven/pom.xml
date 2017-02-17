@@ -203,10 +203,20 @@
         
         <!-- ######### COMMONS-COLLECTIONS ######### -->
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1 </version>
+	</dependency> 
+        <dependency>
             <artifactId>commons-collections</artifactId>
             <groupId>commons-collections</groupId>
             <type>jar</type>
             <version>3.2.1</version>
+        </dependency>
+        <dependency> 
+            <groupId>commons-fileupload</groupId> 
+            <artifactId>commons-fileupload</artifactId> 
+            <version>1.2.1</version> 
         </dependency>
         
         <!-- ############### DOM4J ################# -->

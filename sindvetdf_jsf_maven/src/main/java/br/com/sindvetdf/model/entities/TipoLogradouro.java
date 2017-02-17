@@ -2,9 +2,9 @@ package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,8 +24,8 @@ public class TipoLogradouro implements Serializable{
     @Column(name="DescricaoTipoLogradouro", length=35, nullable=false)
     private String descricaoTipoLogradouro;
     
-    @OneToMany
-    @ForeignKey(name="EnderecoTipoLogradouro")
+    @OneToMany(mappedBy="tipoLogradouro",fetch=FetchType.LAZY)
+    @ForeignKey(name="Endereco_TipoLogradouro")
     private List<Endereco> enderecos;
 
     public TipoLogradouro() {
@@ -57,17 +57,7 @@ public class TipoLogradouro implements Serializable{
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.idTipoLogradouro);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -75,9 +65,16 @@ public class TipoLogradouro implements Serializable{
             return false;
         }
         final TipoLogradouro other = (TipoLogradouro) obj;
-        if (!Objects.equals(this.idTipoLogradouro, other.idTipoLogradouro)) {
+        if (this.idTipoLogradouro != other.idTipoLogradouro && (this.idTipoLogradouro == null || !this.idTipoLogradouro.equals(other.idTipoLogradouro))) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + (this.idTipoLogradouro != null ? this.idTipoLogradouro.hashCode() : 0);
+        return hash;
     }    
 }

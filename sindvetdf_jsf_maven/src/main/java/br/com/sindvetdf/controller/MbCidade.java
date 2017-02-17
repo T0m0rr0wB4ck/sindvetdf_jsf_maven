@@ -7,12 +7,12 @@ import br.com.sindvetdf.util.FacesContexUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name="mbCidade")
-@SessionScoped
+@RequestScoped
 public class MbCidade implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -26,13 +26,12 @@ public class MbCidade implements Serializable{
     private InterfaceDAO<Cidade> cidadeDAO(){
         InterfaceDAO<Cidade> cidadeDAO = new HibernateDAO<Cidade>(Cidade.class, 
             FacesContexUtil.getRequestSession());
-        return cidadeDAO;
-                
+        return cidadeDAO;                
     }
     
     public String limpCidade() {
         cidade = new Cidade();
-        return "/restrict/cadastrarcidade.faces";
+        return editCidade();
     }
     
     public String editCidade(){
@@ -51,14 +50,14 @@ public class MbCidade implements Serializable{
     
     private void insertCidade() {
         cidadeDAO().save(cidade);
-        FacesContext.getCurrentInstance().addMessage(null, new 
-        FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!",""));
+        FacesContext.getCurrentInstance().addMessage(null, 
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!",""));
     }
 
     private void updateCidade() {
         cidadeDAO().update(cidade);
-        FacesContext.getCurrentInstance().addMessage(null, new 
-        FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!",""));
+        FacesContext.getCurrentInstance().addMessage(null, 
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!",""));
     }
     
     public void deleteCidade(){

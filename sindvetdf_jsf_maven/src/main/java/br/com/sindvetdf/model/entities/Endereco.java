@@ -1,7 +1,6 @@
 package br.com.sindvetdf.model.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,28 +33,28 @@ public class Endereco implements Serializable{
     @Column(name="Complemento")
     private Integer complemento;
     
-    @OneToOne(optional = true, fetch=FetchType.LAZY)
-    @ForeignKey(name="EnderecoPessoa")
+    @OneToOne(optional=true, fetch=FetchType.LAZY)
+    @ForeignKey(name="Endereco_Pessoa")
     @JoinColumn(name="IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
     
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name="EnderecoTipoLogradouro")
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ForeignKey(name="Endereco_TipoLogradouro")
     @JoinColumn(name="IdTipoLogradouro", referencedColumnName = "IdTipoLogradouro")
     private TipoLogradouro tipologradouro;
     
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name="EnderecoEstado")
-    @JoinColumn(name="IdEstado", referencedColumnName = "IdEstado")
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ForeignKey(name="Endereco_Estado")
+    @JoinColumn(name="IdEstado", nullable=false)
     private Estado estado;
     
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name="EnderecoTipoEndereco")
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ForeignKey(name="Endereco_TipoEndereco")
     @JoinColumn(name="IdTipoEndereco", referencedColumnName = "IdTipoEndereco")
     private TipoEndereco tipoendereco;
     
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @ForeignKey(name="EnderecoCidade")
+    @ManyToOne(optional=false, fetch = FetchType.LAZY)
+    @ForeignKey(name="Endereco_Cidade")
     @JoinColumn(name="IdCidade", referencedColumnName = "IdCidade")
     private Cidade cidade;
 
@@ -157,28 +156,24 @@ public class Endereco implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.idEndereco);
+        int hash = 7;
+        hash = 41 * hash + (this.idEndereco != null ? this.idEndereco.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
+        
         final Endereco other = (Endereco) obj;
-        if (!Objects.equals(this.idEndereco, other.idEndereco)) {
+        if (this.idEndereco != other.idEndereco && (this.idEndereco == null || !this.idEndereco.equals(other.idEndereco))) {
             return false;
         }
         return true;
     }
-    
-    
 }
